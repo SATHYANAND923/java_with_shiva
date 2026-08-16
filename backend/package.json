@@ -1,6 +1,9 @@
 {
   "name": "java-with-shiva-backend",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "description": "Backend for java_with_shiva - notes/PDF platform with Razorpay payments",
   "main": "server.js",
   "scripts": {
@@ -15,7 +18,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "multer": "^1.4.5-lts.1",
-    "razorpay": "^2.9.4"
+    "razorpay": "^2.9.4",
+    "cloudinary": "^2.5.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"

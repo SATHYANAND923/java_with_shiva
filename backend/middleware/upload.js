@@ -1,14 +1,9 @@
 const multer = require("multer");
-const path = require("path");
 
-// Stores uploaded PDFs in backend/uploads with a unique filename
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, path.join(__dirname, "..", "uploads")),
-  filename: (req, file, cb) => {
-    const unique = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, unique + path.extname(file.originalname));
-  },
-});
+// Files are held in memory only, then uploaded straight to Cloudinary from the route handler.
+// This replaces the old disk storage, which lost every file whenever the server restarted
+// (Render's free tier wipes local disk on restart — Cloudinary storage survives that).
+const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
   if (file.mimetype === "application/pdf") cb(null, true);
