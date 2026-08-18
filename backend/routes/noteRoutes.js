@@ -2,6 +2,7 @@ const express = require("express");
 const Note = require("../models/Note");
 const Purchase = require("../models/Purchase");
 const protect = require("../middleware/auth");
+const optionalAuth = require("../middleware/optionalAuth");
 const adminOnly = require("../middleware/admin");
 const upload = require("../middleware/upload");
 const cloudinary = require("../config/cloudinary");
@@ -71,13 +72,17 @@ router.delete("/:id", protect, adminOnly, async (req, res) => {
   }
 });
 
-// GET /api/notes/:id/download -> checks access rules, then streams the PDF from Cloudinary
-router.get("/:id/download", protect, async (req, res) => {
+// GET /api/notes/:id/download -> free notes are open to anyone; paid notes need
+// the requester to be logged in AND to have purchased this specific note.
+router.get("/:id/download", optionalAuth, async (req, res) => {
   try {
     const note = await Note.findById(req.params.id);
     if (!note) return res.status(404).json({ message: "Note not found" });
 
     if (note.isPaid) {
+      if (!req.user) {
+        return res.status(401).json({ message: "Please log in to download this note" });
+      }
       const purchase = await Purchase.findOne({
         user: req.user.id,
         note: note._id,
@@ -105,12 +110,15 @@ router.get("/:id/download", protect, async (req, res) => {
 
 // GET /api/notes/:id/view -> same access rules as download, but opens the PDF inline
 // in the browser (new tab) instead of forcing a file download.
-router.get("/:id/view", protect, async (req, res) => {
+router.get("/:id/view", optionalAuth, async (req, res) => {
   try {
     const note = await Note.findById(req.params.id);
     if (!note) return res.status(404).json({ message: "Note not found" });
 
     if (note.isPaid) {
+      if (!req.user) {
+        return res.status(401).json({ message: "Please log in to view this note" });
+      }
       const purchase = await Purchase.findOne({
         user: req.user.id,
         note: note._id,
