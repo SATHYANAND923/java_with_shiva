@@ -20,6 +20,7 @@ export default function Navbar() {
 
       <nav className="nav-links">
         {user?.isAdmin && <Link to="/admin/upload">Upload Note</Link>}
+        {user?.isAdmin && <Link to="/admin/users">Manage Users</Link>}
         {user && !user.isAdmin && <Link to="/my-purchases">My Purchases</Link>}
         {user ? (
           <>
