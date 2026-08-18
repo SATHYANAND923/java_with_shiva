@@ -63,6 +63,26 @@ export default function AdminUpload() {
         >
           <option value="Java">Java</option>
           <option value="DSA">DSA</option>
+          <option value="C">C</option>
+          <option value="C++">C++</option>
+          <option value="Python">Python</option>
+          <option value="JavaScript">JavaScript</option>
+          <option value="TypeScript">TypeScript</option>
+          <option value="C#">C#</option>
+          <option value="PHP">PHP</option>
+          <option value="Ruby">Ruby</option>
+          <option value="React.js">React.js</option>
+          <option value="Angular">Angular</option>
+          <option value="Vue.js">Vue.js</option>
+          <option value="Next.js">Next.js</option>
+          <option value="Bootstrap">Bootstrap</option>
+          <option value="HTML">HTML</option>
+          <option value="CSS">CSS</option>
+          <option value="Node.js">Node.js</option>
+          <option value="Express.js">Express.js</option>
+          <option value="SQL">SQL</option>
+          <option value="XML">XML</option>
+          <option value="Mongodb">Mongodb</option>
           <option value="Interview Questions">Interview Questions</option>
         </select>
 

@@ -63,8 +63,9 @@ export default function Home() {
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
           <option value="">All Categories</option>
           <option value="Java">Java</option>
+          <option value="DSA">DSA</option>
           <option value="C">C</option>
-          <option value="C">C++</option>
+          <option value="C++">C++</option>
           <option value="Python">Python</option>
           <option value="JavaScript">JavaScript</option>
           <option value="TypeScript">TypeScript</option>
