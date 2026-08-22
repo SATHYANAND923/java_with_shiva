@@ -4,6 +4,29 @@ body {
   font-family: "Segoe UI", Roboto, Arial, sans-serif;
   background: #f5f7fa;
   color: #1a202c;
+  position: relative;
+}
+
+/* Watermark logo tiled across the entire screen behind every page's content.
+   Fixed positioning + repeat makes it cover the full viewport on any device,
+   scrolling or not. pointer-events: none ensures it never blocks real clicks. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("/watermark.png");
+  background-repeat: repeat;
+  background-position: center;
+  background-size: 260px 260px;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Keep real page content above the watermark layer */
+.container, .navbar {
+  position: relative;
+  z-index: 1;
 }
 .container { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
 
